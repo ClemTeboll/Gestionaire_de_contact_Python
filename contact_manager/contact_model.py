@@ -1,4 +1,5 @@
 import re
+from exceptions_model import *
 
 class ContactModel:
     def __init__(self, name, surname, email):
@@ -7,24 +8,24 @@ class ContactModel:
         self.email = email
 
     def check_name(self, name):
-        if (name.len <= 2):
-            print_name_response = print("Votre nom doit avoir plus de 2 caractères. Veuillez réessayer.")
-            return print_name_response
-
-        return name
+        try:
+            if (name.len >= 2):
+                return name
+        except:
+            raise InvalidContactNameException()
 
     def check_surname(self, surname):
-        if (surname.len <= 2):
-            print_surname_response = print("Votre prénom doit avoir plus de 2 caractères. Veuillez réessayer.")
-            return print_surname_response
-
-        return surname
+        try:
+            if (surname.len >= 2):
+                return surname
+        except:
+            raise InvalidContactSurnameException()
 
     def check_email(self, email):
         regex = r'/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'
 
-        if (re.fullmatch(regex, email)):
-             print_name_response = print("Votre email n'est pas valide. Veuillez réessayer.")
-             return print_name_response
-
-        return email
+        try:
+            if (not re.fullmatch(regex, email)):
+              return email
+        except:
+            raise InvalidContactEmailException()
