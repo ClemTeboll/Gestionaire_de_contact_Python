@@ -1,12 +1,14 @@
 from tkinter import *
 from contact_model import ContactModel
+from contact_manager import ContactManager
+
+new_contact_manager = ContactManager()
 
 window = Tk()
 
 window.geometry('1200x600')
 window.title('Gestionnaire de contacts')
 window.configure(background = '#FFF')
-# window.resizable(height=False, width=False)
 
 title_label = Label(window, text='Gestionnaire de contact')
 title_label.pack(pady=50)
